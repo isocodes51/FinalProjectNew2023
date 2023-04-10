@@ -1,10 +1,10 @@
-﻿using Entitites.Abstract;
+﻿using Core.Entitites;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace DataAccess.Abstract
+namespace Core.DataAccess
 { //class: Referans Tip demek burada
   //IEntity: IEntity olabilir veya IEntity implemente eden bir nesne olabilir
   //new(): new lenebilir olmalı

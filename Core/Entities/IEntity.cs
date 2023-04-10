@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Entitites.Abstract
+namespace Core.Entitites
 {
     //IEntity implement eden Class bir VeriTabanı tablosudur.
     public interface IEntity
