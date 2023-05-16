@@ -1,7 +1,9 @@
 ﻿using Business.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
+using Entitites.Concrete;
 using System;
+using System.Collections.Generic;
 
 namespace ConsoleUI
 {   //SOLID
@@ -10,8 +12,26 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-             ProductTest();
+            // ProductTest();
             // CategoryTest();
+            EklemeTest();
+
+        }
+
+        private static void EklemeTest()
+        {
+            ProductManager productManager = new ProductManager(new EfProductDal());
+            Product product = new Product
+            {
+                //ProductId = 10000,
+                CategoryId = 1,
+                ProductName = "Bilgisayar",
+                UnitsInStock = 1,
+                UnitPrice = 15000
+
+            };
+
+            productManager.Add(product);
         }
 
         private static void CategoryTest()
@@ -32,5 +52,9 @@ namespace ConsoleUI
                 Console.WriteLine(product.ProductName+" "+product.CategoyName);
             }
         }
+
+        
+       
+
     }
 }
