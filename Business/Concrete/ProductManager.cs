@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.InMemory;
@@ -21,15 +22,18 @@ namespace Business.Concrete
 
         public IResult Add(Product product)
         {
+            if (product.ProductName.Length < 2)
+                 return new ErrorResult(Messages.ProductNameInvalid);
+
             _productDal.Add(product);
-            return new Result(true, "Ürün Eklendi");
+            return new Result(true, Messages.ProductAdded);
         }
 
-        public List<Product> GetAll() //IProductService/GetAll()
+        public IDataResult<List<Product>> GetAll() //IProductService/GetAll()
         {
             //İş kodları
             //Yetkisi var mı
-            return _productDal.GetAll(); //DataAccess/EntityFramework/EfCategoryDal/ GetAll() methodu
+            return new DataResult<List<Product>>( _productDal.GetAll(),true,"Ürünler Listelendi");   //DataAccess/EntityFramework/EfCategoryDal/ GetAll() methodu
         }
 
         public List<Product> GetAllByCategoryId(int id)
