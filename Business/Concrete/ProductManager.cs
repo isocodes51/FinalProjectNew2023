@@ -31,12 +31,12 @@ namespace Business.Concrete
 
         public IDataResult<List<Product>> GetAll() //IProductService/GetAll()
         {
-           //if(DateTime.Now.Hour == 22)
-           // {
-           //     return new ErrorDataResult<List<Product>>(Messages.MaintenanceTime);
-           // }
-            
-            
+            if (DateTime.Now.Hour == 22)
+            {
+                return new ErrorDataResult<List<Product>>(Messages.MaintenanceTime);
+            }
+
+
             //İş kodları
             //Yetkisi var mı
             return new SuccessDataResult<List<Product>>( _productDal.GetAll(),Messages.ProductsListed);   //DataAccess/EntityFramework/EfCategoryDal/ GetAll() methodu
