@@ -14,4 +14,8 @@
     <ProjectReference Include="..\Entitites\Entitites.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ValidationRules\" />
+  </ItemGroup>
+
 </Project>
