@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.InMemory;
@@ -22,6 +23,7 @@ namespace Business.Concrete
             _productDal = productDal;
         }
 
+        [Validate]
         public IResult Add(Product product)
         {
             //validation
@@ -29,7 +31,7 @@ namespace Business.Concrete
             ValidationTool.Validate(new ProductValidator(), product);
 
             _productDal.Add(product);
-            return new Result(true, Messages.ProductAdded);
+            return new SuccessResult(Messages.ProductAdded);
         }
 
         public IDataResult<List<Product>> GetAll() //IProductService/GetAll()
