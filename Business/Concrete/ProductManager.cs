@@ -1,10 +1,12 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.InMemory;
 using Entitites.Concrete;
 using Entitites.DTOs;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -22,14 +24,9 @@ namespace Business.Concrete
 
         public IResult Add(Product product)
         {
-           //validation
+            //validation
 
-            if(product.UnitPrice <= 0)
-            {
-                return new ErrorResult(Messages.UnitPriceInvalid);
-            }
-            if (product.ProductName.Length < 2)
-                 return new ErrorResult(Messages.ProductNameInvalid);
+            ValidationTool.Validate(new ProductValidator(), product);
 
             _productDal.Add(product);
             return new Result(true, Messages.ProductAdded);
