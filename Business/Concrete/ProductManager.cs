@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.CCS;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -18,20 +19,22 @@ namespace Business.Concrete
     public class ProductManager : IProductService
     {
         IProductDal _productDal; //Bunu yaparak DataAccess altındaki EntityFramework Haberleşmesi sağlıyoruz
-
+                                 //dependency injection
         public ProductManager(IProductDal productDal) //EntityFramework , başka zaman başka bir şey olabilir. o yuzden soyutunu tanımlayıp constructorda soyutunun çağırdığı geliyor
         {
             _productDal = productDal;
+           
         }
 
         [ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
         {
             //business codes
-
-
-            _productDal.Add(product);
-            return new SuccessResult(Messages.ProductAdded);
+           
+                _productDal.Add(product);
+                return new SuccessResult(Messages.ProductAdded);
+           
+          
         }
 
         public IDataResult<List<Product>> GetAll() //IProductService/GetAll()
