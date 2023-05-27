@@ -16,6 +16,7 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(p => p.UnitPrice).GreaterThan(0);
             RuleFor(p => p.UnitPrice).GreaterThanOrEqualTo(10).When(p => p.CategoryId == 1).WithMessage("Ürün Fiyatı 10'dan küçük ve Eşit Olamaz!");
             RuleFor(p => p.ProductName).Must(StartWithA);
+            
         }
 
         private bool StartWithA(string arg)
