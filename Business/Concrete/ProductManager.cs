@@ -22,10 +22,12 @@ namespace Business.Concrete
     {
         IProductDal _productDal; //Bunu yaparak DataAccess altındaki EntityFramework Haberleşmesi sağlıyoruz
                                  //dependency injection
-        public ProductManager(IProductDal productDal) //EntityFramework , başka zaman başka bir şey olabilir. o yuzden soyutunu tanımlayıp constructorda soyutunun çağırdığı geliyor
+
+        ICategoryService _categoryService;
+        public ProductManager(IProductDal productDal, ICategoryService categoryService) //EntityFramework , başka zaman başka bir şey olabilir. o yuzden soyutunu tanımlayıp constructorda soyutunun çağırdığı geliyor
         {
             _productDal = productDal;
-           
+            _categoryService = categoryService;
         }
 
 
@@ -94,6 +96,11 @@ namespace Business.Concrete
                 return new ErrorResult(Messages.ProductNameAlreadyExists);
             }
             return new SuccessResult();
+        }
+
+        private IDataResult<List<ProductDetailDto>> CheckIfCategoryLimit(string categoryName)
+        {
+            var result =_productDal.GetAll(p => p.ProductName == p.)
         }
     }
 }
